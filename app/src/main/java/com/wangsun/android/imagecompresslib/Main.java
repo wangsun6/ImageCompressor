@@ -3,6 +3,7 @@ package com.wangsun.android.imagecompresslib;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.tbruyelle.rxpermissions2.RxPermissions;
+import com.wangsun.android.imagecompressor.ImgCompressor;
 
 import java.io.File;
 import java.io.IOException;
@@ -49,17 +51,17 @@ public class Main extends AppCompatActivity {
 //
 //        ImgCompressor compressor=new ImgCompressor(this);
 //
-////        try {
-////            compressor
-////                    .setMaxWidth(640)
-////                    .setMaxHeight(480)
-////                    .setQuality(75)
-////                    .setCompressFormat(Bitmap.CompressFormat.WEBP)
-////                    .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath())
-////                    .compressToFile(file);
-////        } catch (IOException e) {
-////            e.printStackTrace();
-////        }
+//        try {
+//            compressor
+//                    .setMaxWidth(640)
+//                    .setMaxHeight(480)
+//                    .setQuality(75)
+//                    .setCompressFormat(Bitmap.CompressFormat.WEBP)
+//                    .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath())
+//                    .compressToFile(file);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 //
 //        compositeDisposable = new CompositeDisposable();
 //        Disposable disposable = compressor
