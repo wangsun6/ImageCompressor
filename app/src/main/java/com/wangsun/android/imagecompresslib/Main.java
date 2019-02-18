@@ -3,25 +3,16 @@ package com.wangsun.android.imagecompresslib;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.graphics.Bitmap;
-import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.tbruyelle.rxpermissions2.RxPermissions;
-import com.wangsun.android.imagecompressor.ImgCompressor;
 
-import java.io.File;
-import java.io.IOException;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 public class Main extends AppCompatActivity {
     RxPermissions rxPermissions;
