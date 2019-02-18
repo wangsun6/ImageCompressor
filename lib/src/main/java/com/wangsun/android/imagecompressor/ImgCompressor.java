@@ -1,10 +1,9 @@
 package com.wangsun.android.imagecompressor;
 
-import android.content.Context;
-import android.graphics.Bitmap;
 
+import android.graphics.Bitmap;
+import android.os.Environment;
 import java.io.File;
-import java.io.IOException;
 import java.util.concurrent.Callable;
 
 import io.reactivex.Flowable;
@@ -14,11 +13,17 @@ public class ImgCompressor {
     private int maxHeight = 1280;
     private Bitmap.CompressFormat compressFormat = Bitmap.CompressFormat.JPEG;
     private int quality = 90;
-    private String destinationDirectoryPath="";
+    private String destinationDirectoryPath= Environment.getExternalStorageDirectory()+"/CompressorLib";
+    private String fileName="";
 
 
-    public ImgCompressor(Context context){
-        destinationDirectoryPath= context.getCacheDir().getPath() + File.separator + "images";
+//    public ImgCompressor(Context context){
+//        destinationDirectoryPath= context.getCacheDir().getPath() + File.separator + "images";
+//    }
+
+    public ImgCompressor setFileName(String name){
+        this.fileName= name;
+        return this;
     }
 
     public ImgCompressor setMaxWidth(int maxWidth){
@@ -53,7 +58,14 @@ public class ImgCompressor {
 
 
     public Flowable<File> compressToFileAsFlowable(File imageFile){
-        return compressToFileAsFlowable(imageFile, imageFile.getName());
+
+        if(fileName.equals("")){
+            return compressToFileAsFlowable(imageFile, imageFile.getName());
+        }
+        else {
+            return compressToFileAsFlowable(imageFile, fileName);
+        }
+
     }
 
 
