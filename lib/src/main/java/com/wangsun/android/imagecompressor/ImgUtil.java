@@ -3,6 +3,8 @@ package com.wangsun.android.imagecompressor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.media.ExifInterface;
@@ -33,7 +35,7 @@ public class ImgUtil {
 
 
     public static File compressImage(int maxWidth,int maxHeight,int quality,Bitmap.CompressFormat compressFormat,
-                                       File inputImage,String destinationDirectoryPath) {
+                                       File inputImage,String destinationDirectoryPath,boolean isGreyScale) {
         Bitmap scaledBitmap = null;
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
@@ -101,6 +103,9 @@ public class ImgUtil {
 
             scaledBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(),
                     matrix, true);
+            if(isGreyScale){
+                scaledBitmap = toGrayScale(scaledBitmap);
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -116,5 +121,21 @@ public class ImgUtil {
         }
 
         return new File(destinationDirectoryPath);
+    }
+
+    private static Bitmap toGrayScale(Bitmap bmpOriginal){
+        int width, height;
+        height = bmpOriginal.getHeight();
+        width = bmpOriginal.getWidth();
+
+        Bitmap bmpGrayscale = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_4444);
+        Canvas c = new Canvas(bmpGrayscale);
+        Paint paint = new Paint();
+        ColorMatrix cm = new ColorMatrix();
+        cm.setSaturation(0);
+        ColorMatrixColorFilter f = new ColorMatrixColorFilter(cm);
+        paint.setColorFilter(f);
+        c.drawBitmap(bmpOriginal, 0, 0, paint);
+        return bmpGrayscale;
     }
 }

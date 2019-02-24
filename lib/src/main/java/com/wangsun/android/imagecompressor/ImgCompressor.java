@@ -15,6 +15,7 @@ public class ImgCompressor {
     private int quality = 90;
     private String destinationDirectoryPath= Environment.getExternalStorageDirectory()+"/CompressorLib";
     private String fileName="";
+    private boolean isGreyScale = false;
 
 
 //    public ImgCompressor(Context context){
@@ -33,6 +34,11 @@ public class ImgCompressor {
 
     public ImgCompressor setMaxHeight(int maxHeight){
         this.maxHeight = maxHeight;
+        return this;
+    }
+
+    public ImgCompressor setGreyScale(boolean value){
+        this.isGreyScale = value;
         return this;
     }
 
@@ -81,6 +87,6 @@ public class ImgCompressor {
     /***************************Final Method that communicate with ImageUtil***************************/
     public File compressToFile(File inputImage,String compressedFileName) {
         return ImgUtil.compressImage(maxWidth,maxHeight,quality,compressFormat,
-                inputImage,destinationDirectoryPath+ File.separator + compressedFileName);
+                inputImage,destinationDirectoryPath+ File.separator + compressedFileName,isGreyScale);
     }
 }
